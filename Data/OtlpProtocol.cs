@@ -1,4 +1,4 @@
-﻿namespace KattGjenta;
+﻿namespace KattGjenta.Data;
 
 public enum OtlpProtocol
 {

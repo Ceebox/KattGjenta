@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace KattGjenta;
+namespace KattGjenta.Data;
 
 public sealed class TracingConfig
 {

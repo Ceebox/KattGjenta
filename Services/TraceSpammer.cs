@@ -3,7 +3,7 @@ using OpenTelemetry.Exporter;
 using OpenTelemetry.Trace;
 using System.Diagnostics;
 
-namespace KattGjenta;
+namespace KattGjenta.Services;
 
 public sealed class TraceSpammer : BackgroundService
 {
