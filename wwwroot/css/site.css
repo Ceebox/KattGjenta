@@ -1,5 +1,12 @@
+html {
+    --green: #3adb76;
+    --red: #ff5f56;
+}
+
 body {
     font-family: "Cascadia Code", monospace;
+    background-color: white;
+    color: black;
 }
 
 #blazor-error-ui {
@@ -31,11 +38,6 @@ body {
         content: "An error has occurred."
     }
 
-body {
-    background-color: white;
-    color: black;
-}
-
 h1 {
     display: flex;
     justify-content: center;
@@ -50,9 +52,18 @@ h1 {
     }
 
     .btn {
+        font-family: "Cascadia Code", monospace;
         border-color: #444;
         background-color: #222;
         color: #fafafa;
+    }
+
+    .btn-success {
+        border: 2px solid var(--green);
+    }
+
+    .btn-danger {
+        border: 2px solid var(--red);
     }
 }
 
@@ -94,17 +105,17 @@ h1 {
     }
 
 .text-running {
-    color: #3adb76;
+    color: var(--green);
     font-weight: 600;
 }
 
 .text-stopped {
-    color: #ff5f56;
+    color: var(--red);
     font-weight: 600;
 }
 
 .validation-error {
-    color: #ff5f56;
+    color: var(--red);
     font-weight: 600;
     padding-top: 0.25rem;
 }

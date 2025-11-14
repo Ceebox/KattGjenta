@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace KattGjenta;
 
-public class TraceSpammer : BackgroundService
+public sealed class TraceSpammer : BackgroundService
 {
     private readonly ILogger<TraceSpammer> mLogger;
     private readonly ActivitySource mActivitySource = new(nameof(TraceSpammer));
