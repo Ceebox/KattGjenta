@@ -1,0 +1,85 @@
+﻿@using System.ComponentModel.DataAnnotations
+@using Microsoft.AspNetCore.Components.Forms
+@inject TraceSpammer Spammer
+
+<EditForm class="settings-form" Model="@mConfig" OnValidSubmit="UpdateConfig">
+    <DataAnnotationsValidator />
+
+    <div class="form-group mb-3">
+        <label>OTLP Endpoint:</label>
+        <InputText class="form-control" @bind-Value="mConfig.OtlpEndpoint" />
+        <ValidationMessage For="@(() => mConfig.OtlpEndpoint)" />
+    </div>
+
+    <div class="form-group mb-3">
+        <label>Protocol:</label>
+        <InputSelect class="form-control" @bind-Value="mConfig.Protocol">
+            <option value="@OtlpProtocol.Grpc">gRPC</option>
+            <option value="@OtlpProtocol.HttpProtobuf">HTTP / Protobuf</option>
+        </InputSelect>
+        <ValidationMessage class="validation-error" For="@(() => mConfig.Protocol)" />
+    </div>
+
+    <div class="form-group mb-3">
+        <label>Traces Per Second:</label>
+        <InputNumber class="form-control" @bind-Value="mConfig.Rate" min="0" />
+        <ValidationMessage class="validation-error" For="@(() => mConfig.Rate)" />
+    </div>
+
+    <div class="form-group mb-3">
+        <label>Trace Depth:</label>
+        <InputNumber class="form-control" @bind-Value="mConfig.TraceDepth" min="0" />
+        <ValidationMessage class="validation-error" For="@(() => mConfig.TraceDepth)" />
+    </div>
+
+    <div class="form-group mb-3">
+        <label>Children Per Node:</label>
+        <InputNumber class="form-control" @bind-Value="mConfig.ChildrenPerNode" min="0" />
+        <ValidationMessage class="validation-error" For="@(() => mConfig.ChildrenPerNode)" />
+    </div>
+
+    <div class="form-group mb-3">
+        <label>Min Child Duration (ms):</label>
+        <InputNumber class="form-control" @bind-Value="mConfig.MinChildDurationMs" min="0" />
+        <ValidationMessage class="validation-error" For="@(() => mConfig.MinChildDurationMs)" />
+    </div>
+
+    <div class="form-group mb-3">
+        <label>Max Child Duration (ms):</label>
+        <InputNumber class="form-control" @bind-Value="mConfig.MaxChildDurationMs" min="0" />
+        <ValidationMessage class="validation-error" For="@(() => mConfig.MaxChildDurationMs)" />
+    </div>
+
+    <div class="btn-toolbar mt-3">
+        <button class="btn btn-success me-2" @onclick="StartSpammer" disabled="@Spammer.IsRunning">Start</button>
+        <button class="btn btn-danger" @onclick="StopSpammer" disabled="@(!Spammer.IsRunning)">Stop</button>
+    </div>
+
+    <p>
+        Status:
+        <span class="@StatusClass">@StatusText</span>
+    </p>
+
+</EditForm>
+
+@code {
+    private TracingConfig mConfig => this.Spammer.Config;
+
+    private string StatusText => this.Spammer.IsRunning ? "Running" : "Stopped";
+    private string StatusClass => this.Spammer.IsRunning ? "text-running" : "text-stopped";
+
+    private void UpdateConfig()
+    {
+        this.Spammer.UpdateConfig();
+    }
+
+    private void StartSpammer()
+    {
+        this.Spammer.Start();
+    }
+
+    private void StopSpammer()
+    {
+        this.Spammer.Stop();
+    }
+}
