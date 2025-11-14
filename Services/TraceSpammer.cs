@@ -1,4 +1,5 @@
-﻿using OpenTelemetry;
+﻿using KattGjenta.Data;
+using OpenTelemetry;
 using OpenTelemetry.Exporter;
 using OpenTelemetry.Trace;
 using System.Diagnostics;

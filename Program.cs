@@ -1,5 +1,5 @@
+using KattGjenta.Data;
 using KattGjenta.Services;
-using OpenTelemetry.Trace;
 
 namespace KattGjenta;
 
